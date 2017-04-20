@@ -2,7 +2,9 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,13 +26,13 @@ public class FileIOTests {
 	public void testAnswerGeneration() {
 		
 		game.GenerateQuestion();   //generates the boxes
-		ArrayList<Boxes>  boxes = game.getBoxes();
+		ArrayList<Box>  boxes = game.getBoxes();
 		
 		int numberCorrectAns = 0;
 		
 		for (Box b : boxes) {  
 			
-			if (b.getValue == game.getAnswer()) {
+			if (b.getValue() == game.getAnswer()) {
 				numberCorrectAns++;
 			}
 		}
@@ -38,6 +40,7 @@ public class FileIOTests {
 		assertEquals(1, numberCorrectAns); //assert only one correct answer is generated 
 	}
 	
+	@Test
 	public void testQuestionGeneration() {
 		
 		Map<Integer,Integer> answers = new HashMap<Integer, Integer>();
@@ -52,15 +55,16 @@ public class FileIOTests {
 			assertEquals(1, i);			//check only one answer is generated per game, no repeats
 		}	
 	}
-	
+	@Test
 	public void testNewHighScore() {
-		for (int i = 0; i < 100; i++) {
-			game.getCurrentScore();
-			PrintWriter out = newPrintWriter(FILENAME);
-			
-			
-		}
+		game.setHighScore(100);
+		game.setCurrentScore(150);
+		
+		game.checkHighScore();
+		assertEquals(150, game.getHighScore());
 	}
+
+	
 		
 	
 	
