@@ -40,7 +40,7 @@ public class GUI_MAIN extends JFrame {
 		
 		String name = JOptionPane.showInputDialog(frame, "What's your name?");
 		
-		game.setName(name);s
+		game.setName(name);
 		
 	}
 
