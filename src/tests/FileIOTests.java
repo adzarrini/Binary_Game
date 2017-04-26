@@ -56,8 +56,8 @@ public class FileIOTests {
 		}	
 	}
 	@Test
-	public void testNewHighScore() {
-		game.setHighScore(100);
+	public void testNewHighScore() throws FileNotFoundException {
+		game.setHighScore(100, "Bill");
 		game.setCurrentScore(150);
 		
 		game.checkHighScore();
