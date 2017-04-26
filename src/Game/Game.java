@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ import java.util.Scanner;
 public class Game {
 	
 	private int currentScore = 0;
-	private String fileName = "data/Highscore.txt";
+	private String highScoreFile = "data/Highscore.txt";
 
 	public ArrayList<Box> getBoxes() {
 		// TODO Auto-generated method stub
@@ -44,30 +45,30 @@ public class Game {
 		return null;
 	}
 
-	public void setHighScore(int i, String name) {
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-		
-		try {
-			String content = name + " " + i;
+	public void setHighScore(int currentScore, String name) throws FileNotFoundException {
+
+		PrintWriter printWriter;
+	
+		printWriter = new PrintWriter(highScoreFile);
+
+		printWriter.println(name + ", " + currentScore);
+		printWriter.close();
 			
-			fw = new FileWriter(fileName);
-			bw = new BufferedWriter(fw);
-			bw.write(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 	}
 
 	public void checkHighScore() throws FileNotFoundException {
 		if (currentScore > getHighScore()){
+			try {
 			setHighScore(currentScore, getName());
+			}
+			catch (FileNotFoundException e) {
+				System.err.println("Error - HighScoreFile");
+			}
 		}
 	}
 	
 	public int getHighScore() throws FileNotFoundException {
-		FileReader reader = new FileReader(fileName);
+		FileReader reader = new FileReader(highScoreFile);
 		Scanner in = new Scanner(reader);
 		String line = in.nextLine();
 		String[] score = line.split(" ");
