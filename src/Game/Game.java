@@ -42,7 +42,6 @@ public class Game {
 
 	public void checkHighScore() {
 		// TODO Auto-generated method stub
-	
 	}
 	
 	public int getHighScore() {
