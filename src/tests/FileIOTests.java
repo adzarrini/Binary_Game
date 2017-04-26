@@ -32,7 +32,7 @@ public class FileIOTests {
 		
 		for (Box b : boxes) {  
 			
-			if (b.getValue() == game.getAnswer()) {
+			if (b.getValue() == game.getQuestion()) {
 				numberCorrectAns++;
 			}
 		}
@@ -48,7 +48,7 @@ public class FileIOTests {
 		for (int i = 0; i < 1000; i++) {
 			game.generateAnswers();
 			
-			answers.put(game.getAnswer(), answers.get(game.getAnswer()) + 1);
+			answers.put(game.getQuestion(), answers.get(game.getQuestion()) + 1);
 		}
 		
 		for (int i : answers.values()) {

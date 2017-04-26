@@ -6,31 +6,74 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Game {
 	
 	private int currentScore = 0;
+	private int question = 0;
 	private String fileName = "data/Highscore.txt";
+	private Set<Integer> used;
+	private ArrayList<Integer> range;
+	private ArrayList<Box> answers;
 
+	public Game() {
+		used = new HashSet<Integer>();
+		range = new ArrayList<Integer>();
+		answers = new ArrayList<Box>();
+		answers.add(new Box(100,100)); 
+		answers.add(new Box(200,100)); 
+		answers.add(new Box(100,200)); 
+		answers.add(new Box(200,200)); 
+	}
+	
 	public ArrayList<Box> getBoxes() {
-		// TODO Auto-generated method stub
-		return null;
+		return answers;
 	}
 
 	public void GenerateQuestion() {
-		// TODO Auto-generated method stub
+		Random rand = new Random();
+		do{
+		question = rand.nextInt(50);
+		} while (!used.contains(question));
+		used.add(question);
 		
+		generateAnswers();
 	}
 
-	public int getAnswer() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getQuestion() {
+		return question;
 	}
 
 	public void generateAnswers() {
-		// TODO Auto-generated method stub
+		Random rand1 = new Random();
+		range.clear();
+		for(int i = question-10; i < question+10; i++){
+			if(i > 0 && i < 51){
+				range.add(i);
+			}
+		}
+		range.remove(question);
+		int correct = rand1.nextInt(4);
+		
+		for(int i = 0; i < 4; i++){
+			
+			if(i == correct){
+				answers.get(i).setAnswer(true);
+				answers.get(i).setBinary_value(question);
+			}
+			else {
+				answers.get(i).setAnswer(false);
+				int index = rand1.nextInt(range.size());
+				answers.get(i).setBinary_value(range.get(index));
+			}
+		}
+		
+		
 		
 	}
 
