@@ -19,7 +19,7 @@ public class FileIOTests {
 	
 	@BeforeClass
 	public static void setUp(){
-		//TODO setup the game 
+		 game = new Game();
 	}
 	
 	@Test
@@ -55,8 +55,10 @@ public class FileIOTests {
 			assertEquals(1, i);			//check only one answer is generated per game, no repeats
 		}	
 	}
+	
 	@Test
 	public void testNewHighScore() throws FileNotFoundException {
+		//TODO - this shouldn't throw an exception 
 		game.setHighScore(100, "Bill");
 		game.setCurrentScore(150);
 		

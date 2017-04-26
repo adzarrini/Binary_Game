@@ -12,8 +12,13 @@ import java.util.Scanner;
 
 public class Game {
 	
-	private int currentScore = 0;
-	private String highScoreFile = "data/Highscore.txt";
+	private int currentScore;
+	private String highScoreFile;
+	
+	public Game() {
+		highScoreFile = "data/HighScore.txt";
+		currentScore = 0;
+	}
 
 	public ArrayList<Box> getBoxes() {
 		// TODO Auto-generated method stub
@@ -36,8 +41,7 @@ public class Game {
 	}
 
 	public void setCurrentScore(int i) {
-		// TODO Auto-generated method stub
-		
+		currentScore = i;	
 	}
 
 	public char[] getCurrentScore() {
@@ -45,34 +49,38 @@ public class Game {
 		return null;
 	}
 
-	public void setHighScore(int currentScore, String name) throws FileNotFoundException {
-
+	public void setHighScore(int currentScore, String name) {
+		//TODO should be reworked
+		//We should only have to read in the highScore at the beginning of the game, and then
+		//write the score at the end of the game. This is confusing with all the setters and getters 
+		
 		PrintWriter printWriter;
-	
+		
+		try {
 		printWriter = new PrintWriter(highScoreFile);
-
 		printWriter.println(name + ", " + currentScore);
 		printWriter.close();
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Error - HighScoreFile");
+			e.printStackTrace();
+		}
 			
 	}
 
 	public void checkHighScore() throws FileNotFoundException {
 		if (currentScore > getHighScore()){
-			try {
 			setHighScore(currentScore, getName());
-			}
-			catch (FileNotFoundException e) {
-				System.err.println("Error - HighScoreFile");
-			}
 		}
 	}
 	
 	public int getHighScore() throws FileNotFoundException {
+		//where is this exception handled? I don't think it is 
 		FileReader reader = new FileReader(highScoreFile);
 		Scanner in = new Scanner(reader);
 		String line = in.nextLine();
-		String[] score = line.split(" ");
-		return Integer.parseInt(score[1]);
+		String[] score = line.split(", ");
+		return Integer.parseInt(score[1]);	
 	}
 	
 	public String getName(){
