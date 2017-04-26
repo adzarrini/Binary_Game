@@ -14,35 +14,54 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GUI_MAIN extends JFrame {
+	
+	List<Image> icons = new ArrayList<Image>();
+	
+	Game game = new Game();
 	
 	GUI_MAIN() {
 	 JFrame_Init();
 	 setIcons();
 	 
+	 showPlayerInputDialog();
+	 
+	 
 	 //TODO add JPanels here
 	}
 	
+
+	private void showPlayerInputDialog() {
+		JFrame frame = new JFrame();
+		frame.setIconImages(icons);
+		
+		String name = JOptionPane.showInputDialog(frame, "What's your name?");
+		
+		game.setName(name);s
+		
+	}
+
+
+
 	//Initializes the JFrame
-	public void JFrame_Init() {
+	private void JFrame_Init() {
 		setTitle("Binary Game (shit title, somebody more creative change this)");
 		setSize(800,600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-		
-		//TODO splash box for name 
 		
 	}
 	
 	//sets the icon images
 	public void setIcons() {
-		List<Image> icons = new ArrayList<Image>();
-		
+	
 		try {
 			icons.add(ImageIO.read(new File("data/Icons/Icon16.jpg")));
 			icons.add(ImageIO.read(new File("data/Icons/Icon32.jpg")));

@@ -14,6 +14,7 @@ public class Game {
 	
 	private int currentScore;
 	private String highScoreFile;
+	private String currentPlayer;
 	
 	public Game() {
 		highScoreFile = "data/HighScore.txt";
@@ -84,9 +85,11 @@ public class Game {
 	}
 	
 	public String getName(){
-		String name = "Sam";
-		//prompt user to input their name, to be written to the highscores file
-		return name;
+		return currentPlayer;
+	}
+	
+	public void setName(String n) {
+		currentPlayer = n;
 	}
 
 }
