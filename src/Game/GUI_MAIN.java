@@ -35,6 +35,8 @@ public class GUI_MAIN extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
+		//TODO splash box for name 
+		
 	}
 	
 	//sets the icon images

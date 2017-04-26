@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,12 +21,11 @@ public class FileIOTests {
 	
 	@BeforeClass
 	public static void setUp(){
-		//TODO setup the game 
+		 game = new Game();
 	}
 	
 	@Test
 	public void testAnswerGeneration() {
-		
 		game.GenerateQuestion();   //generates the boxes
 		ArrayList<Box>  boxes = game.getBoxes();
 		
@@ -43,20 +44,19 @@ public class FileIOTests {
 	@Test
 	public void testQuestionGeneration() {
 		
-		Map<Integer,Integer> answers = new HashMap<Integer, Integer>();
+		Set<Integer> questions = new HashSet<Integer>();
 				
-		for (int i = 0; i < 1000; i++) {
-			game.generateAnswers();
+		for (int i = 0; i < 49; i++) {
+			game.GenerateQuestion();
 			
-			answers.put(game.getQuestion(), answers.get(game.getQuestion()) + 1);
+			questions.add(game.getQuestion());
 		}
-		
-		for (int i : answers.values()) {
-			assertEquals(1, i);			//check only one answer is generated per game, no repeats
-		}	
+		assertEquals(49, questions.size());
 	}
+	
 	@Test
 	public void testNewHighScore() throws FileNotFoundException {
+		//TODO - this shouldn't throw an exception 
 		game.setHighScore(100, "Bill");
 		game.setCurrentScore(150);
 		

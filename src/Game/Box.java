@@ -14,8 +14,7 @@ public class Box {
 	}
 	
 	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		return binary_value;
 	}
 
 	public void setAnswer(boolean isAnswer) {
