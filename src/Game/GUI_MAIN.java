@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 
@@ -10,18 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class GUI_MAIN extends JFrame {
 	
 	GUI_MAIN() {
 	 JFrame_Init();
 	 setIcons();
-	
-	 //TODO add JPanels here
 	 
+	 //TODO add JPanels here
 	}
 	
 	//Initializes the JFrame
@@ -57,9 +58,7 @@ public class GUI_MAIN extends JFrame {
 	
 	
 	public static void main(String [] args) {
-		
 		GUI_MAIN game = new GUI_MAIN();
-		
 	}
 	
 }
