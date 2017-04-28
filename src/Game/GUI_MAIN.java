@@ -2,6 +2,7 @@ package Game;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 
 import java.awt.Toolkit;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GUI_MAIN extends JFrame {
 	
@@ -35,13 +37,20 @@ public class GUI_MAIN extends JFrame {
 	
 
 	private void showPlayerInputDialog() {
-		JFrame frame = new JFrame();
-		frame.setIconImages(icons);
+		JTextField field  = new JTextField(10);
+		JLabel label = new JLabel("Please enter your name: ");
 		
-		String name = JOptionPane.showInputDialog(frame, "What's your name?");
+		label.setFont(new Font("Bauhaus 93", 0, 25));
+		field.setFont(new Font("Bauhaus 93", 0, 20));
+		JPanel p = new JPanel(new BorderLayout(5, 2));
+		p.add(label, BorderLayout.WEST);
+		p.add(field);
 		
-		game.setName(name);
+		JOptionPane.showMessageDialog(null, p, null, JOptionPane.PLAIN_MESSAGE, null);
 		
+		//TODO set focus to text box
+		
+		game.setName(field.getText());
 	}
 
 
