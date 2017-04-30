@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -26,13 +27,15 @@ public class GUI_MAIN extends JFrame {
 	Game game = new Game();
 	
 	GUI_MAIN() {
+		
 	 JFrame_Init();
 	 setIcons();
 	 
-	 showPlayerInputDialog();
-	 
-	 
-	 //TODO add JPanels here
+	//TODO add JPanels here 
+	 add(new GUI_Menu(), BorderLayout.CENTER);
+
+	 showPlayerInputDialog();  //TODO uncomment 
+	 setVisible(true);
 	}
 	
 
@@ -59,9 +62,9 @@ public class GUI_MAIN extends JFrame {
 	private void JFrame_Init() {
 		setTitle("Binary Game (shit title, somebody more creative change this)");
 		setSize(800,600);
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		setVisible(true);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
