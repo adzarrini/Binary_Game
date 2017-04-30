@@ -4,30 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GUI_Menu extends JPanel {
-	
-	List<Image> icons = new ArrayList<Image>();
-	
+		
 	GUI_Menu() {
 		
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(0,4));
+		panel1.add(helpButton());
 		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(2,2));
-		
-		panel1.add(helpButton());
-		
 		panel2.add(new JPanel());
 		panel2.add(new JPanel());
 		panel2.add(puzzleButton());
@@ -44,6 +36,7 @@ public class GUI_Menu extends JPanel {
 		help.setPreferredSize(new Dimension(150,50));
 		help.setBackground(Color.RED);
 		help.setFocusable(false);
+		help.addActionListener(new helpButtonListener());
 		
 		JPanel panel = new JPanel();
 		panel.add(help);
@@ -56,6 +49,7 @@ public class GUI_Menu extends JPanel {
 		puzzle.setPreferredSize(new Dimension(300,100));
 		puzzle.setBackground(Color.CYAN);
 		puzzle.setFocusable(false);
+		puzzle.addActionListener(new puzzleButtonListener());
 
 		
 		JPanel panel = new JPanel();
@@ -71,26 +65,43 @@ public class GUI_Menu extends JPanel {
 		snake.setPreferredSize(new Dimension(300,100));
 		snake.setBackground(Color.CYAN);
 		snake.setFocusable(false);
+		snake.addActionListener(new snakeButtonListener());
 
-
-		
 		JPanel panel = new JPanel();
 		panel.add(snake);
 		
 		return panel;
 	}
 	
-	public void setIcons() {
-		
-//		try {
-//			//TODO add icons
-//		}
-//		catch (IOException e) {
-//			System.err.println("Error - Icon Image Failed Read in");
-//			e.printStackTrace();
-//		}
+	//=============================================================
+	// ACTION LISTENERS
+	//============================================================
+	class helpButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("help");
+		}
 		
 	}
 	
+	class puzzleButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("puzzle");
+		}	
+	}
+	
+	class snakeButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("snake");
+		}	
+	}
 	
 }
