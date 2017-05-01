@@ -43,6 +43,8 @@ public class Box {
 		
 	}
 	
+
+	
 	public boolean containsClick(int x, int y){
 		if(x >= this.x && x <= this.x + WIDTH && y >= this.y && y <= this.y + HEIGHT) return true;
 		return false;

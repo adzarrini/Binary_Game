@@ -31,6 +31,8 @@ public class Game extends JPanel{
 	private ArrayList<Integer> range;
 	private ArrayList<Box> boxes;
 	private static Game theInstance = new Game();
+	private int livesLeft = 5;
+	private int pointsLost;
 	
 
 
@@ -64,6 +66,8 @@ public class Game extends JPanel{
 		for(Box a: boxes){
 			a.drawBox(g);
 		}
+		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
+		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 60);
 	}
 
 
@@ -77,6 +81,7 @@ public class Game extends JPanel{
 		
 		boxes.get(0).setValue(question);
 
+		pointsLost = 0;
 		generateAnswers();
 		repaint();
 	}
@@ -164,11 +169,13 @@ public class Game extends JPanel{
 
 	public void handleClick(int index){
 		if(boxes.get(index).getAnswer()){
-			currentScore++;
+			currentScore += 5 - pointsLost;
 			generateQuestion();
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+			pointsLost++;
+			livesLeft--;
 			
 		}
 	}
