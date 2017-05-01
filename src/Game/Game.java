@@ -1,5 +1,8 @@
 package Game;
 
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,16 +16,21 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-public class Game {
+
+public class Game extends JPanel{
 
 	private int question = 0;
-	private int currentScore;
+	private int currentScore = 0;
 	private String highScoreFile;
 	private String currentPlayer;
 	private ArrayList<Integer> possibleQuestions;
 	private ArrayList<Integer> range;
-	private ArrayList<Box> answers;
+	private ArrayList<Box> boxes;
+	private static Game theInstance = new Game();
 
 
 	public Game() {
@@ -32,24 +40,42 @@ public class Game {
 			possibleQuestions.add(i);
 		}
 		Collections.shuffle(possibleQuestions);
-		answers = new ArrayList<Box>();
-		answers.add(new Box(100,100)); 
-		answers.add(new Box(200,100)); 
-		answers.add(new Box(100,200)); 
-		answers.add(new Box(200,200));
+		boxes = new ArrayList<Box>();
+		boxes.add(new Box(300,50,true));
+		boxes.add(new Box(100,200, false)); 
+		boxes.add(new Box(500,200, false)); 
+		boxes.add(new Box(100,400, false)); 
+		boxes.add(new Box(500,400, false));
+
 		highScoreFile = "data/HighScore.txt";
 		currentScore = 0;
+
+		addMouseListener(new BoxListener());
 	}
+
+	public static Game getInstance() {
+		return theInstance;
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		for(Box a: boxes){
+			a.drawBox(g);
+		}
+	}
+
 
 	public ArrayList<Box> getBoxes() {
-		return answers;
+		return boxes;
 	}
 
-	public void GenerateQuestion() {
+	public void generateQuestion() {
 		question = possibleQuestions.get(0);
 		possibleQuestions.remove(0);
 
 		generateAnswers();
+		repaint();
 	}
 
 	public int getQuestion() {
@@ -70,13 +96,13 @@ public class Game {
 		for(int i = 0; i < 4; i++){
 
 			if(i == correct){
-				answers.get(i).setAnswer(true);
-				answers.get(i).setBinary_value(question);
+				boxes.get(i).setAnswer(true);
+				boxes.get(i).setValue(question);
 			}
 			else {
-				answers.get(i).setAnswer(false);
+				boxes.get(i).setAnswer(false);
 				int index = rand1.nextInt(range.size());
-				answers.get(i).setBinary_value(range.get(index));
+				boxes.get(i).setValue(range.get(index));
 			}
 		}
 	}
@@ -127,9 +153,37 @@ public class Game {
 	public String getName(){
 		return currentPlayer;
 	}
-	
+
 	public void setName(String n) {
 		currentPlayer = n;
+	}
+
+	public void handleClick(int index){
+		if(boxes.get(index).getAnswer()){
+			currentScore++;
+			generateQuestion();
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+	public class BoxListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {
+			for(int i = 1; i < 5; i++){
+				if (boxes.get(i).containsClick(e.getX(), e.getY())) {
+					System.out.println(i);
+					handleClick(i);
+					repaint();
+				}
+			}
+		}
+
 	}
 
 }

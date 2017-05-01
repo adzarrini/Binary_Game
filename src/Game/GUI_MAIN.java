@@ -24,18 +24,20 @@ public class GUI_MAIN extends JFrame {
 	
 	List<Image> icons = new ArrayList<Image>();
 	
-	Game game = new Game();
+	private static Game game;
 	
-	GUI_MAIN() {
-		
-	 JFrame_Init();
-	 setIcons();
-	 
-	//TODO add JPanels here 
-	 add(new GUI_Menu(), BorderLayout.CENTER);
+	public GUI_MAIN() {
 
-	 showPlayerInputDialog();  //TODO uncomment 
-	 setVisible(true);
+		JFrame_Init();
+		setIcons();
+
+		//TODO add JPanels here 
+		game.getInstance().generateQuestion();
+		add(game.getInstance(), BorderLayout.CENTER);
+		//add(new GUI_Menu(), BorderLayout.CENTER);
+
+		//showPlayerInputDialog();  //TODO uncomment 
+		setVisible(true);
 	}
 	
 

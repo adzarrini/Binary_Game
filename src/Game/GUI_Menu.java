@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GUI_Menu extends JPanel {
+	
+	private Game game;
 		
 	GUI_Menu() {
 		
@@ -27,6 +29,7 @@ public class GUI_Menu extends JPanel {
 		
 		add(panel1);
 		add(panel2);
+		
 	
 	}
 	

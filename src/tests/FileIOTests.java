@@ -26,7 +26,7 @@ public class FileIOTests {
 	
 	@Test
 	public void testAnswerGeneration() {
-		game.GenerateQuestion();   //generates the boxes
+		game.generateQuestion();   //generates the boxes
 		ArrayList<Box>  boxes = game.getBoxes();
 		
 		int numberCorrectAns = 0;
@@ -47,7 +47,7 @@ public class FileIOTests {
 		Set<Integer> questions = new HashSet<Integer>();
 				
 		for (int i = 0; i < 49; i++) {
-			game.GenerateQuestion();
+			game.generateQuestion();
 			
 			questions.add(game.getQuestion());
 		}
