@@ -31,6 +31,7 @@ public class Game extends JPanel{
 	private ArrayList<Integer> range;
 	private ArrayList<Box> boxes;
 	private static Game theInstance = new Game();
+	
 
 
 	public Game() {
@@ -73,6 +74,8 @@ public class Game extends JPanel{
 	public void generateQuestion() {
 		question = possibleQuestions.get(0);
 		possibleQuestions.remove(0);
+		
+		boxes.get(0).setValue(question);
 
 		generateAnswers();
 		repaint();
@@ -91,9 +94,9 @@ public class Game extends JPanel{
 			}
 		}
 		range.remove(range.indexOf(question));
-		int correct = rand1.nextInt(4);
+		int correct = rand1.nextInt(4) + 1; 
 
-		for(int i = 0; i < 4; i++){
+		for(int i = 1; i < 5; i++){
 
 			if(i == correct){
 				boxes.get(i).setAnswer(true);
@@ -102,6 +105,7 @@ public class Game extends JPanel{
 			else {
 				boxes.get(i).setAnswer(false);
 				int index = rand1.nextInt(range.size());
+				//range.remove(range.indexOf(index));
 				boxes.get(i).setValue(range.get(index));
 			}
 		}
@@ -165,6 +169,7 @@ public class Game extends JPanel{
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+			
 		}
 	}
 

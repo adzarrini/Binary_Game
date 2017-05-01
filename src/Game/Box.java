@@ -30,6 +30,8 @@ public class Box {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Bauhaus 93", 0, 30));
 			g.drawString(Integer.toBinaryString((1 << NUM_BITS) | value).substring(1), x + WIDTH/2 - 50, y + HEIGHT/2 + 7);
+			//g.drawString(Integer.toString(value), x + WIDTH/2 - 15, y + HEIGHT/2 + 7);
+			
 		}
 		else{
 			g.setColor(Color.ORANGE);
