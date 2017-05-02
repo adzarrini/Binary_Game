@@ -1,7 +1,6 @@
 package Game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -40,13 +38,12 @@ public class GUI_MAIN extends JFrame {
 		game.getInstance().generateQuestion();
 		add(game.getInstance(), BorderLayout.CENTER);
 		
-		//add(new GUI_Menu(), BorderLayout.CENTER);
-		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		
-		showPlayerInputDialog();  //TODO uncomment 
+		
+		showPlayerInputDialog(); 
 		setVisible(true);
 	}
 	
@@ -71,7 +68,20 @@ public class GUI_MAIN extends JFrame {
 	private JMenu createFileMenu(){
 		JMenu menu = new JMenu("File");
 		menu.add(createFileExitItem());
+		menu.add(createHelpNotes());
+		menu.add(createAboutUs());
 		return menu;
+	}
+	
+	private JMenuItem createHelpNotes() {
+		JMenuItem item = new JMenuItem("Help!");
+		class MenuItemListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				HelpNotes help = new HelpNotes(); 	
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
 	}
 	
 	private JMenuItem createFileExitItem(){
@@ -79,6 +89,17 @@ public class GUI_MAIN extends JFrame {
 		class MenuItemListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
+	private JMenuItem createAboutUs() {
+		JMenuItem item = new JMenuItem("About Us");
+		class MenuItemListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				AboutUs about = new AboutUs();
 			}
 		}
 		item.addActionListener(new MenuItemListener());
@@ -121,8 +142,6 @@ public class GUI_MAIN extends JFrame {
 	}
 	
 
-	
-	
 	
 	public static void main(String [] args) {
 		GUI_MAIN game = new GUI_MAIN();
