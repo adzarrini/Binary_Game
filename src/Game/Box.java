@@ -1,8 +1,10 @@
 package Game;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Box {
 	
@@ -25,8 +27,13 @@ public class Box {
 	
 	public void drawBox(Graphics g){
 		if(!isQuestion){
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setStroke(new BasicStroke(7));
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, WIDTH, HEIGHT);
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, WIDTH, HEIGHT);
+			
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Bauhaus 93", 0, 30));
 			g.drawString(Integer.toBinaryString((1 << NUM_BITS) | value).substring(1), x + WIDTH/2 - 50, y + HEIGHT/2 + 7);
@@ -34,6 +41,10 @@ public class Box {
 			
 		}
 		else{
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setStroke(new BasicStroke(7));
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, WIDTH, HEIGHT);
 			g.setColor(Color.ORANGE);
 			g.fillRect(x, y, WIDTH, HEIGHT);
 			g.setColor(Color.BLACK);

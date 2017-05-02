@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -66,8 +67,16 @@ public class Game extends JPanel{
 		for(Box a: boxes){
 			a.drawBox(g);
 		}
+		//g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
-		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 60);
+		try {
+			g.drawString("High Score: " + String.valueOf(getHighScore()), 5, 60);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 90);
+		
 	}
 
 
