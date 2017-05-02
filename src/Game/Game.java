@@ -203,7 +203,6 @@ public class Game extends JPanel{
 		public void mousePressed(MouseEvent e) {
 			for(int i = 1; i < 5; i++){
 				if (boxes.get(i).containsClick(e.getX(), e.getY())) {
-					System.out.println(i);
 					handleClick(i);
 					repaint();
 				}
