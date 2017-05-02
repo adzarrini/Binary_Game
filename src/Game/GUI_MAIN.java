@@ -39,6 +39,7 @@ public class GUI_MAIN extends JFrame {
 		//TODO add JPanels here 
 		game.getInstance().generateQuestion();
 		add(game.getInstance(), BorderLayout.CENTER);
+		
 		//add(new GUI_Menu(), BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -93,6 +94,10 @@ public class GUI_MAIN extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(createFileMenu());
+		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
@@ -114,6 +119,8 @@ public class GUI_MAIN extends JFrame {
 		
 		setIconImages(icons);
 	}
+	
+
 	
 	
 	
