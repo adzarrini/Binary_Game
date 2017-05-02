@@ -32,9 +32,12 @@ public class Game extends JPanel{
 	private ArrayList<Integer> range;
 	private ArrayList<Box> boxes;
 	private static Game theInstance = new Game();
-	private int livesLeft = 5;
+	private int livesLeft = 3;
 	private int pointsLost;
 	private int redBox = -1;
+
+	private boolean decimal = true;
+	private Random rand;
 
 	
 
@@ -47,11 +50,14 @@ public class Game extends JPanel{
 		}
 		Collections.shuffle(possibleQuestions);
 		boxes = new ArrayList<Box>();
+
 		boxes.add(new Box(300,50,true, false));
 		boxes.add(new Box(100,200, false, false)); 
 		boxes.add(new Box(500,200, false, false)); 
 		boxes.add(new Box(100,400, false, false)); 
 		boxes.add(new Box(500,400, false, false));
+
+		rand = new Random();
 
 		highScoreFile = "data/HighScore.txt";
 		currentScore = 0;
@@ -77,7 +83,7 @@ public class Game extends JPanel{
 				boxes.get(i).drawRedBox(g);
 			}
 		}
-		
+
 		g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
 		try {
@@ -106,6 +112,11 @@ public class Game extends JPanel{
 		pointsLost = 0;
 		redBox = -1;
 		generateAnswers();
+		
+		int z = rand.nextInt(2);
+		if(z == 0) decimal = true;
+		else decimal = false;
+		
 		repaint();
 	}
 
@@ -188,6 +199,10 @@ public class Game extends JPanel{
 
 	public void setName(String n) {
 		currentPlayer = n;
+	}
+	
+	public boolean getDecimal(){
+		return decimal;
 	}
 
 	public void handleClick(int index){

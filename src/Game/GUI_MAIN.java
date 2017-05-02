@@ -41,7 +41,11 @@ public class GUI_MAIN extends JFrame {
 		add(game.getInstance(), BorderLayout.CENTER);
 		
 		//add(new GUI_Menu(), BorderLayout.CENTER);
-
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(createFileMenu());
+		
 		//showPlayerInputDialog();  //TODO uncomment 
 		setVisible(true);
 	}
@@ -63,8 +67,24 @@ public class GUI_MAIN extends JFrame {
 		
 		game.setName(field.getText());
 	}
-
-
+	
+	private JMenu createFileMenu(){
+		JMenu menu = new JMenu("File");
+		menu.add(createFileExitItem());
+		return menu;
+	}
+	
+	private JMenuItem createFileExitItem(){
+		JMenuItem item = new JMenuItem("Exit");
+		class MenuItemListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
 
 	//Initializes the JFrame
 	private void JFrame_Init() {
@@ -100,26 +120,7 @@ public class GUI_MAIN extends JFrame {
 		setIconImages(icons);
 	}
 	
-	private JMenu createFileMenu() {
-		JMenu menu = new JMenu("File");
-		//menu.add(createDetectiveNotesItem());
-		menu.add(createFileExitItem());
-		
-		return menu;
-	}
-	
-	private JMenuItem createFileExitItem() {
-		JMenuItem item = new JMenuItem("Exit");
-		class MenuItemListener implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		}
-		item.addActionListener(new MenuItemListener());
-		
-		return item;
-	
-	}
+
 	
 	
 	
