@@ -18,7 +18,7 @@ public class HelpNotes extends JDialog {
 	
 	public HelpNotes() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setTitle("About Us");
+		setTitle("Help!");
 		
 		try {
 			add(new JLabel(new ImageIcon(ImageIO.read(new File(imageFile)))));
@@ -27,10 +27,7 @@ public class HelpNotes extends JDialog {
 			e.printStackTrace();
 		}
 
-	
-		
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
-		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
 		
 		pack();
 		setVisible(true);

@@ -90,8 +90,8 @@ public class Game extends JPanel{
 
 		g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
-		//g.drawString("High Score: " + highScoreName + " - " + String.valueOf(highScore), 5, 60);
-		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 60);
+		g.drawString("High Score: " + highScoreName + " - " + String.valueOf(highScore), 5, 60);
+		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 90);
 		
 	}
 	

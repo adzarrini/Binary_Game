@@ -68,8 +68,8 @@ public class GUI_MAIN extends JFrame {
 	private JMenu createFileMenu(){
 		JMenu menu = new JMenu("File");
 		menu.add(createFileExitItem());
-		//menu.add(createHelpNotes());
-		//menu.add(createAboutUs());
+		menu.add(createHelpNotes());
+		menu.add(createAboutUs());
 		return menu;
 	}
 	

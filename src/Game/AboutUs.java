@@ -16,7 +16,7 @@ public class AboutUs extends JDialog {
 	
 	public AboutUs() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setTitle("Help!");
+		setTitle("About Us");
 		
 		try {
 			add(new JLabel(new ImageIcon(ImageIO.read(new File(imageFile)))));
@@ -27,8 +27,6 @@ public class AboutUs extends JDialog {
 
 	
 		
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //opens the JFrame in the center of the screen
-		setLocation(dim.width/2-this.getSize().width, dim.height/2-this.getSize().height);
 		
 		pack();
 		setVisible(true);
