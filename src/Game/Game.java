@@ -34,6 +34,8 @@ public class Game extends JPanel{
 	private static Game theInstance = new Game();
 	private int livesLeft = 5;
 	private int pointsLost;
+	private int redBox = -1;
+
 	
 
 
@@ -45,11 +47,11 @@ public class Game extends JPanel{
 		}
 		Collections.shuffle(possibleQuestions);
 		boxes = new ArrayList<Box>();
-		boxes.add(new Box(300,50,true));
-		boxes.add(new Box(100,200, false)); 
-		boxes.add(new Box(500,200, false)); 
-		boxes.add(new Box(100,400, false)); 
-		boxes.add(new Box(500,400, false));
+		boxes.add(new Box(300,50,true, false));
+		boxes.add(new Box(100,200, false, false)); 
+		boxes.add(new Box(500,200, false, false)); 
+		boxes.add(new Box(100,400, false, false)); 
+		boxes.add(new Box(500,400, false, false));
 
 		highScoreFile = "data/HighScore.txt";
 		currentScore = 0;
@@ -64,9 +66,18 @@ public class Game extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		for(Box a: boxes){
-			a.drawBox(g);
+//		for(Box a: boxes){
+//			a.drawBox(g);
+//		}
+		for (int i = 0; i < boxes.size(); i++) {
+			if (i != redBox && !boxes.get(i).isClicked()) {
+				boxes.get(i).drawBox(g);
+			}
+			else {
+				boxes.get(i).drawRedBox(g);
+			}
 		}
+		
 		//g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
 		try {
@@ -78,6 +89,8 @@ public class Game extends JPanel{
 		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 90);
 		
 	}
+	
+
 
 
 	public ArrayList<Box> getBoxes() {
@@ -91,6 +104,7 @@ public class Game extends JPanel{
 		boxes.get(0).setValue(question);
 
 		pointsLost = 0;
+		redBox = -1;
 		generateAnswers();
 		repaint();
 	}
@@ -180,11 +194,17 @@ public class Game extends JPanel{
 		if(boxes.get(index).getAnswer()){
 			currentScore += 5 - pointsLost;
 			generateQuestion();
+			for (Box b: boxes) {
+				b.setClicked(false);
+			}
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
 			pointsLost++;
 			livesLeft--;
+			boxes.get(index).setClicked(true);
+			redBox = index;
+			repaint();
 			
 		}
 	}
