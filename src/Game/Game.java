@@ -77,10 +77,8 @@ public class Game extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-//		for(Box a: boxes){
-//			a.drawBox(g);
-//		}
+		super.setBackground(new Color(204, 255, 255));
+		
 		for (int i = 0; i < boxes.size(); i++) {
 			if (i != redBox && !boxes.get(i).isClicked()) {
 				boxes.get(i).drawBox(g);
@@ -204,6 +202,11 @@ public class Game extends JPanel{
 	}
 
 	public void handleClick(int index) throws FileNotFoundException{
+		if(possibleQuestions.size() == 0){
+			JOptionPane.showMessageDialog(null, "You won!!!!! Your score is: " + Integer.toString(currentScore), "Winner!", JOptionPane.INFORMATION_MESSAGE);
+			checkHighScore();
+			System.exit(0);
+		}
 		if(boxes.get(index).getAnswer()){
 			currentScore += 5 - pointsLost;
 			generateQuestion();
