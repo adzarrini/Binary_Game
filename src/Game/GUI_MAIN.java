@@ -46,7 +46,7 @@ public class GUI_MAIN extends JFrame {
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		
-		//showPlayerInputDialog();  //TODO uncomment 
+		showPlayerInputDialog();  //TODO uncomment 
 		setVisible(true);
 	}
 	
@@ -65,7 +65,7 @@ public class GUI_MAIN extends JFrame {
 		
 		//TODO set focus to text box
 		
-		game.setName(field.getText());
+		game.getInstance().setName(field.getText());
 	}
 	
 	private JMenu createFileMenu(){

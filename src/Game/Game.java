@@ -26,6 +26,7 @@ public class Game extends JPanel{
 
 	private int question = 0;
 	private int currentScore = 0;
+	private int highScore = 0;
 	private String highScoreFile;
 	private String currentPlayer;
 	private ArrayList<Integer> possibleQuestions;
@@ -35,6 +36,7 @@ public class Game extends JPanel{
 	private int livesLeft = 3;
 	private int pointsLost;
 	private int redBox = -1;
+	private String highScoreName = null;
 
 	private boolean decimal = true;
 	private Random rand;
@@ -42,6 +44,12 @@ public class Game extends JPanel{
 	
 	public Game() {
 		range = new ArrayList<Integer>();
+		highScoreFile = "data/HighScore.txt";
+		try {
+			highScore = getHighScore();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		possibleQuestions = new ArrayList<Integer>();
 		for(int i = 1; i < 51; i++){
 			possibleQuestions.add(i);
@@ -49,15 +57,15 @@ public class Game extends JPanel{
 		Collections.shuffle(possibleQuestions);
 		boxes = new ArrayList<Box>();
 
-		boxes.add(new Box(300,50,true, false));
-		boxes.add(new Box(100,200, false, false)); 
-		boxes.add(new Box(500,200, false, false)); 
+		boxes.add(new Box(300,100,true, false));
+		boxes.add(new Box(100,250, false, false)); 
+		boxes.add(new Box(500,250, false, false)); 
 		boxes.add(new Box(100,400, false, false)); 
 		boxes.add(new Box(500,400, false, false));
 
 		rand = new Random();
 
-		highScoreFile = "data/HighScore.txt";
+		
 		currentScore = 0;
 
 		addMouseListener(new BoxListener());
@@ -84,12 +92,7 @@ public class Game extends JPanel{
 
 		g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
-		try {
-			g.drawString("High Score: " + String.valueOf(getHighScore()), 5, 60);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		g.drawString("High Score: " + highScoreName + " - " + String.valueOf(highScore), 5, 60);
 		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 90);
 		
 	}
@@ -122,6 +125,7 @@ public class Game extends JPanel{
 		return question;
 	}
 
+	
 	public void generateAnswers() {
 		Random rand1 = new Random();
 		range.clear();
@@ -152,11 +156,6 @@ public class Game extends JPanel{
 		currentScore = i;	
 	}
 
-	public char[] getCurrentScore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void setHighScore(int currentScore, String name) {
 		//TODO should be reworked
 		//We should only have to read in the highScore at the beginning of the game, and then
@@ -177,7 +176,7 @@ public class Game extends JPanel{
 	}
 
 	public void checkHighScore() throws FileNotFoundException {
-		if (currentScore > getHighScore()){
+		if (currentScore > highScore){
 			setHighScore(currentScore, getName());
 		}
 	}
@@ -188,6 +187,7 @@ public class Game extends JPanel{
 		Scanner in = new Scanner(reader);
 		String line = in.nextLine();
 		String[] score = line.split(", ");
+		highScoreName = score[0];
 		return Integer.parseInt(score[1]);	
 	}
 
@@ -203,7 +203,7 @@ public class Game extends JPanel{
 		return decimal;
 	}
 
-	public void handleClick(int index){
+	public void handleClick(int index) throws FileNotFoundException{
 		if(boxes.get(index).getAnswer()){
 			currentScore += 5 - pointsLost;
 			generateQuestion();
@@ -221,7 +221,14 @@ public class Game extends JPanel{
 			repaint();
 			}
 			else {
-			JOptionPane.showMessageDialog(null, "You are a piece of SHIT. You lose.", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+				if(currentScore > highScore){
+					JOptionPane.showMessageDialog(null, "Congrats " + currentPlayer + " you got a new highscore of: " + Integer.toString(currentScore), "New HighScore!", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "You tried your best, practice makes perfect!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
+				}
+			
+			checkHighScore();
 			System.exit(0);
 			}
 			
@@ -237,7 +244,11 @@ public class Game extends JPanel{
 		public void mousePressed(MouseEvent e) {
 			for(int i = 1; i < 5; i++){
 				if (boxes.get(i).containsClick(e.getX(), e.getY())) {
-					handleClick(i);
+					try {
+						handleClick(i);
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
 					repaint();
 				}
 			}

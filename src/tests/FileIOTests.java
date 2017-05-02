@@ -20,7 +20,7 @@ public class FileIOTests {
 	private static Game game;
 	
 	@BeforeClass
-	public static void setUp(){
+	public static void setUp() throws FileNotFoundException{
 		 game = new Game();
 	}
 	
