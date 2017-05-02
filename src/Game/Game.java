@@ -40,8 +40,6 @@ public class Game extends JPanel{
 	private Random rand;
 
 	
-
-
 	public Game() {
 		range = new ArrayList<Integer>();
 		possibleQuestions = new ArrayList<Integer>();
