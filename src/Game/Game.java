@@ -78,7 +78,7 @@ public class Game extends JPanel{
 			}
 		}
 		
-		//g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
 		try {
 			g.drawString("High Score: " + String.valueOf(getHighScore()), 5, 60);
@@ -199,12 +199,18 @@ public class Game extends JPanel{
 			}
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "You are a piece of SHIT", "You Suck", JOptionPane.INFORMATION_MESSAGE);
 			pointsLost++;
 			livesLeft--;
 			boxes.get(index).setClicked(true);
 			redBox = index;
+			if (livesLeft >= 0) {
 			repaint();
+			}
+			else {
+			JOptionPane.showMessageDialog(null, "You are a piece of SHIT. You lose.", "You Suck", JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
+			}
 			
 		}
 	}
