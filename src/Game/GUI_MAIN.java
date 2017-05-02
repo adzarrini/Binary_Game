@@ -68,8 +68,8 @@ public class GUI_MAIN extends JFrame {
 	private JMenu createFileMenu(){
 		JMenu menu = new JMenu("File");
 		menu.add(createFileExitItem());
-		menu.add(createHelpNotes());
-		menu.add(createAboutUs());
+		//menu.add(createHelpNotes());
+		//menu.add(createAboutUs());
 		return menu;
 	}
 	
@@ -109,7 +109,7 @@ public class GUI_MAIN extends JFrame {
 
 	//Initializes the JFrame
 	private void JFrame_Init() {
-		setTitle("Binary Game (shit title, somebody more creative change this)");
+		setTitle("Binary Game)");
 		setSize(800,600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
