@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,8 +32,10 @@ public class Game extends JPanel{
 	private ArrayList<Integer> range;
 	private ArrayList<Box> boxes;
 	private static Game theInstance = new Game();
-	private int livesLeft = 5;
+	private int livesLeft = 3;
 	private int pointsLost;
+	private boolean decimal = true;
+	private Random rand;
 	
 
 
@@ -49,6 +52,7 @@ public class Game extends JPanel{
 		boxes.add(new Box(500,200, false)); 
 		boxes.add(new Box(100,400, false)); 
 		boxes.add(new Box(500,400, false));
+		rand = new Random();
 
 		highScoreFile = "data/HighScore.txt";
 		currentScore = 0;
@@ -66,6 +70,7 @@ public class Game extends JPanel{
 		for(Box a: boxes){
 			a.drawBox(g);
 		}
+		g.setColor(Color.BLACK);
 		g.drawString("Current Score: " + String.valueOf(currentScore), 5, 30);
 		g.drawString("Lives Left: " + String.valueOf(livesLeft), 5, 60);
 	}
@@ -83,6 +88,11 @@ public class Game extends JPanel{
 
 		pointsLost = 0;
 		generateAnswers();
+		
+		int z = rand.nextInt(2);
+		if(z == 0) decimal = true;
+		else decimal = false;
+		
 		repaint();
 	}
 
@@ -165,6 +175,10 @@ public class Game extends JPanel{
 
 	public void setName(String n) {
 		currentPlayer = n;
+	}
+	
+	public boolean getDecimal(){
+		return decimal;
 	}
 
 	public void handleClick(int index){
